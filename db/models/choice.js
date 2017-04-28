@@ -3,7 +3,7 @@
 const {STRING, INTEGER, TEXT, ARRAY, FLOAT} = require('sequelize')
 
 module.exports = db => db.define('choice', {
-  name: {
+  text: {
     type: STRING,
     allowNull: false,
     validate: {

@@ -17,7 +17,7 @@ export default class NewPollCard extends Component {
                   <Card>
                       <Form>
                       </Form>
-                      <CardItem header style={{flexDirection: 'column', borderColor: 'black'}}>
+                      <CardItem header style={{flexDirection: 'column', borderBottomWidth: 1, borderColor: 'black'}}>
                             <Item floatingLabel underline>
                               <Label>Title</Label>
                                 <Input />
@@ -29,7 +29,7 @@ export default class NewPollCard extends Component {
                             <Input />
                           </Item>
                         </CardItem>
-                      <CardItem style={{flexDirection: 'column'}}>
+                      <CardItem style={{borderWidth: 0, flexDirection: 'column'}}>
                         <InputChoice />
                         <InputChoice />
                     </CardItem>

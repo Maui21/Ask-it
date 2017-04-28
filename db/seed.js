@@ -15,21 +15,20 @@ const db = require('../db'),
 function seedEverything() {
   const seeded = {
     users: users(),
-    speakers: speakers(),
     polls: polls(),
     choices: choices(),
-    votes: votes()
+    //votes: votes()
   }
-  // seeded.magnets = magnets(seeded)
+  seeded.votes = votes(seeded)
   // seeded.reviews = reviews(seeded)
   // seeded.order = orders(seeded)
   return Promise.props(seeded)
 }
 
 const users = seed(User, {
-  god: {
-    email: 'god@example.com',
-    name: 'So many names',
+  judah: {
+    email: 'judah@example.com',
+    name: 'Judah',
     password: '1234',
     isAdmin: false
   },
@@ -41,67 +40,116 @@ const users = seed(User, {
   },
 })
 
-const polls = seed(Poll, ({users, choices}) => ({
-  // order1: {
-  //   products: {
-  //     2: 3,
-  //     3: 2
-  //   },
-  //   user_id: users.god.id
-  // }
+const polls = seed(Poll, ({users}) => ({
+  poll1: {
+    title: 'Pizza or Panckes?',
+    context: 'Which would you prefer as drunk munchies?',
+    answers: ['Pizza', 'Pancakes'],
+    categories: ['misc', 'culture'],
+    totalVotes: 0
+  },
+  poll2: {
+    title: 'Do ghosts exist?',
+    context: 'Ghost: A disembodied consciousness of a dead person',
+    answers: ['Ghosts exist', 'Ghosts do not exist'],
+    categories: ['misc'],
+    totalVotes: 0
+  },
+  poll3: {
+    title: 'Should a man pay on the first date?',
+    context: 'Which would you prefer as drunk munchies?',
+    answers: ['A man should pay', 'A man is not obligated to pay', 'Bill should be split'],
+    categories: ['culture','sensitive'],
+    totalVotes: 0
+  },
+  poll4: {
+    title: 'Are you active on online dating?',
+    context: 'Ex: Tinder, Match.com, etc...',
+    answers: ['I use internet dating',  'I do not use internet dating'],
+    categories: ['culture'],
+    totalVotes: 0
+  }
 }))
 
-const choices = seed(Choice, {
-  marcus: {
-    name: 'Marcus Aurelius',
-    bio: `If ever there was an exemplification of Plato's 'Philosopher King', it would be Marcus Aurelius. Born in 121, he became a Roman Emperor in 161, and his reign lasted until his death in 180. An ardent Stoic, he is best remembered today as the author of the Meditations, a collection of 'spiritual exercises' that were written for himself between 170 and 180. Fortunately for us, this work was preserved for posterity, and it can be read profitably today by anyone looking for a source of spiritual guidance.`,
-    image: 'http://thinkmongr.com/wp-content/uploads/2013/03/marcus-aurelius-4-640x320.png'
+const choices = seed(Choice, ({polls}) => ({
+  choice1: {
+    text: 'Pizza',
+    poll_id: 1
   },
-  virginia: {
-    name: 'Virginia Woolf',
-    bio: ` Born in 1882 in London, Virginia Woolf was an author and essayist today regarded as one of the twentieth century's literary greats. Her most well known works include the novels Mrs Dalloway, To the Lighthouse, Orlando, and the book-length essay A Room of One's Own.`,
-    image: 'http://www.peabodylibrary.org/freeforall/wp-content/uploads/2016/01/woolf1-e1402796124116-650x413.jpg'
+  choice2: {
+    text: 'Pancakes',
+    poll_id: 1
   },
-  ralph: {
-    name: 'Ralph Waldo Emerson',
-    bio: `Born in 1803 in Boston, Massachusetts, Ralph Waldo Emerson was arguably the most influential writer of 19th-century America. Regarded by many as the American version of Michel de Montaigne, Emerson wrote voluminously on a wide range of subjects. Some of his most important essays include Nature, Self-Reliance, and Experience.`,
-    image: 'http://s3.amazonaws.com/armstrongeconomics-wp/2015/04/Emerson-Ralph-Waldo.jpg'
-  }
-})
+  choice3: {
+    text: 'Ghosts exist',
+    poll_id: 2
+  },
+  choice4: {
+    text: 'Ghosts do not exist',
+    poll_id: 2
+  },
+  choice5: {
+    text: 'A man should pay',
+    poll_id: 3
+  },
+  choice6: {
+    text: 'A man is not obligated to pay',
+    poll_id: 3
+  },
+  choice7: {
+    text: 'Bill should be split',
+    poll_id: 3
+  },
+  choice9: {
+    text: 'I use internet dating',
+    poll_id: 4
+  },
+  choice10: {
+    text: 'I do not use internet dating',
+    poll_id: 4
+  },
+}))
 
-const votes = seed(Vote, ({polls, choices, users}) => ({
-  mag1: {
-    title: 'Marcus Aurelius Fridge Magnet #1',
-    quote: 'Though no one can go back and make a brand new start, anyone can start from now and make a brand new ending.',
-    image: 'http://cdn.shopify.com/s/files/1/0273/4903/products/marcus-aurelius-quote-fridge-magnet-1_large.jpg?v=1380466387',
-    itemNumber: 1,
-    description: 'High-quality button style magnet with full magnetic back.',
-    price: 395,
-    size: [2, 3],
-    mood: ['happy'],
-    speaker_id: speakers.marcus.id
+const votes = seed(Vote, ({users, choices, polls}) => ({
+  vote1: {
+    user_id: 1,
+    poll_id: 1,
+    choice_id: 1,
   },
-  mag2: {
-    title: 'Marcus Aurelius Fridge Magnet #2',
-    quote: 'When you arise in the morning, think of what a precious privilege it is to be alive - to breathe, to think, to enjoy, to love.',
-    image: 'http://cdn.shopify.com/s/files/1/0273/4903/products/marcus-aurelius-quote-fridge-magnet-2_large.jpg?v=1380466539',
-    itemNumber: 2,
-    description: 'High-quality button style magnet with full magnetic back.',
-    price: 395,
-    size: [2, 3],
-    mood: ['happy'],
-    speaker_id: speakers.marcus.id
+  vote2: {
+    user_id: 1,
+    poll_id: 2,
+    choice_id: 3,
   },
-  mag3: {
-    title: 'Marcus Aurelius Fridge Magnet #3',
-    quote: 'You have power over your mind - not oustide events. Realize this, and you will find strength.',
-    image: 'http://cdn.shopify.com/s/files/1/0273/4903/products/marcus-aurelius-quote-fridge-magnet-3_large.jpg?v=1380466642',
-    itemNumber: 3,
-    description: 'High-quality button style magnet with full magnetic back.',
-    price: 395,
-    size: [2, 3],
-    mood: ['happy'],
-    speaker_id: speakers.marcus.id
+  vote3: {
+    user_id: 1,
+    poll_id: 3,
+    choice_id: 7,
+  },
+  vote4: {
+    user_id: 1,
+    poll_id: 4,
+    choice_id: 9,
+  },
+  vote5: {
+    user_id: 2,
+    poll_id: 1,
+    choice_id: 1,
+  },
+  vote6: {
+    user_id: 2,
+    poll_id: 2,
+    choice_id: 4,
+  },
+  vote7: {
+    user_id: 2,
+    poll_id: 3,
+    choice_id: 6,
+  },
+  vote8: {
+    user_id: 2,
+    poll_id: 4,
+    choice_id: 8,
   },
 }))
 
@@ -183,3 +231,5 @@ module.exports = Object.assign(seed, {
   choices,
   votes
 })
+
+console.log('ran the seed')

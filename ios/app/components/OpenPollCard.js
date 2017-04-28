@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
-import {Container, Content, Card, CardItem, Text, Body, Button, Item, Input, Icon, Right } from 'native-base';
+import {Footer, Card, CardItem, Text, Left, Button, Item, Input, Icon, Right } from 'native-base';
 import ControlledChoices from './ControlledChoice'
 
 
 const OpenPollCard = props => {
   console.log('my props', props)
   return (
-  <Container>
-    <Content>
       <Card>
         <CardItem>
-          <Icon active name="ios-pricetags" />
+          <Icon active name="md-pie" />
           <Text>{props.poll.title}</Text>
-          <Button light onPress={props.handleToggle} style={{alignSelf: 'flex-end'}}>
-            <Icon active name="arrow-up" />
-          </Button>
+          <Right>
+            <Button transparent onPress={props.handleToggle}>
+              <Icon active name="arrow-up" />
+            </Button>
+          </Right>
         </CardItem>
         <ControlledChoices choices={props.poll.choices} />
+        <Footer>
+          <Left><Text style={{marginLeft: 10}} >{`${props.poll.totalVotes} ${'users'}`}</Text></Left>
+          <Right><Text style={{marginRight: 10}} >{`Judah`}</Text></Right>
+        </Footer>
       </Card>
-    </Content>
-  </Container>
     )
   }
 

@@ -5,7 +5,7 @@ import {View} from 'react-native';
 export default class InputChoice extends Component {
   render() {
     return (
-      <Body>
+      <Body style={{marginBottom: 10}}>
         <Item floatingLabel underline>
           <Label>Answer Choice</Label>
             <Input />
