@@ -14,7 +14,7 @@ import {
 
 import CreatePoll from './ios/app/components/CreatePoll'
 import TabBar from './ios/app/components/TabBar'
-import NewPollCard from './ios/app/components/NewPollCard'
+
 
 export default class AwesomeProject extends Component {
   render() {

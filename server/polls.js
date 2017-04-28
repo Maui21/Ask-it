@@ -1,6 +1,12 @@
 'use strict'
 
-const db = require('APP/db')
+// var express = require('express');
+// var router = express.Router();
+// var models = require('../db/models');
+// var Poll = models.Poll;
+// var User = models.User;
+// var Choice = models.Choice
+const db = require('../db')
 const Poll = db.model('poll')
 const User = db.model('user')
 const Choice = db.model('choice')
@@ -12,9 +18,9 @@ module.exports = require('express').Router()
       .then(allPolls => res.json(allPolls))
       .catch(next)
   })
-  // Find all Polls from a specific User
-  .get('/:userId', (req, res, next) => {
-    Poll.findAll({where: {user_id: req.params.user_id}})
+  //Find all Polls from a specific User
+  .get('/user/:userId', (req, res, next) => {
+    Poll.findAll({where: {user_id: req.params.userId}})
       .then(allPolls => res.json(allPolls))
       .catch(next)
   })
@@ -29,8 +35,8 @@ module.exports = require('express').Router()
     Poll.findById(req.params.id, {
       include: [{
         model: Choice,
-        where: {poll_id: req.params.id}
-      }]
+      }],
+      where: {poll_id: req.params.id}
     })
     .then(poll => {
       poll ? res.json(poll) : res.sendStatus(404)
@@ -51,15 +57,16 @@ module.exports = require('express').Router()
   })
   //Update a poll
   .put('/:id', (req, res, next) => {
+    console.log('hit route')
     Poll.update(req.body, {
       where: {
         id: req.params.id
       },
-      returning: true,
-      plain: true
+      returning: true, //includes data instanse with response
+      plain: true      //returns just JSONinstead of crazy object
     })
     .then(updatedPoll => {
-      updatedPoll ? res.send(updatedPoll) : res.sendStatus(404)
+      updatedPoll[1] ? res.send(updatedPoll[1]) : res.sendStatus(404)
     })
   })
 

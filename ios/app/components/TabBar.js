@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Container, Content, Tab, Tabs, Header, Footer, FooterTab, Button, Text, Left, Body, Title, Right, Icon } from 'native-base';
-import NewPollCard from './NewPollCard';
 import PollList from './PollList';
+import CreatePoll from './CreatePoll';
 import PollCard from './PollCard'
 import FooterNav from './FooterNav'
 import initialState from '../initialState'
+import InputChoice from './InputChoice'
 
 export default class TabBar extends Component {
     render() {
@@ -27,7 +28,10 @@ export default class TabBar extends Component {
                     <PollList polls={initialState.allPolls}/>
                 </Tab>
                 <Tab heading="Create Poll">
-                    <NewPollCard />
+                    <CreatePoll />
+                </Tab>
+                <Tab heading="Analyze">
+                    <InputChoice />
                 </Tab>
             </Tabs>
             <Footer>
@@ -37,6 +41,3 @@ export default class TabBar extends Component {
         );
     }
 }
-                // <Tab heading="Poll Card">
-                //     <PollCard />
-                // </Tab>
