@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { Container, Content, Card, CardItem, Text, Body, Button, Item, List, ListItem, CheckBox, Radio } from 'native-base';
-
+import {Content, Card, CardItem, Text, Item, List, ListItem, CheckBox, Radio } from 'native-base';
 
 const ControlledChoices = props => {
-    // console.log('hii', props)
+  console.log('CCprops', props)
     return (
       <Content>
         {props.choices.map((choice, i) => (
-          <ListItem key ={i} underline onPress={e => console.log(e)}>
+          <ListItem key={choice.id} data-zzz={i} underline onPress={() => {
+            console.log('hit button')
+            props.vote(1,0)
+            console.log('after vote')
+          }}>
               <Radio selected={false}/>
-              <Text>{choice}</Text>
+              <Text>{choice.text}</Text>
           </ListItem>
         ))}
       </Content>
@@ -18,3 +21,4 @@ const ControlledChoices = props => {
 
 export default ControlledChoices
 
+// props.vote(props.choices[i].votes, props.choices[i].id)

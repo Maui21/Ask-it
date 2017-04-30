@@ -1,22 +1,23 @@
 'use strict'
 
-// var express = require('express');
-// var router = express.Router();
-// var models = require('../db/models');
-// var Poll = models.Poll;
-// var User = models.User;
-// var Choice = models.Choice
 const db = require('../db')
 const Poll = db.model('poll')
 const User = db.model('user')
 const Choice = db.model('choice')
+const Vote = db.model('vote')
 
 module.exports = require('express').Router()
  // Find all Polls
   .get('/', (req, res, next) => {
-    Poll.findAll()
-      .then(allPolls => res.json(allPolls))
-      .catch(next)
+    Poll.findAll({
+      include: [{
+        model: Choice
+      }],
+    })
+    .then(allPolls => {
+      allPolls ? res.json(allPolls) : res.sendStatus(404)
+    })
+    .catch(next)
   })
   //Find all Polls from a specific User
   .get('/user/:userId', (req, res, next) => {
@@ -57,7 +58,6 @@ module.exports = require('express').Router()
   })
   //Update a poll
   .put('/:id', (req, res, next) => {
-    console.log('hit route')
     Poll.update(req.body, {
       where: {
         id: req.params.id
@@ -70,3 +70,8 @@ module.exports = require('express').Router()
     })
   })
 
+  .post(':pollId/vote/:choiceId', (req,res,next) => {
+    Vote.create(req.body)
+      .then(vote => res.status(201).json(vote))
+      .catch(next)
+    })

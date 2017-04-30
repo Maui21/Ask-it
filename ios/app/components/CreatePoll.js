@@ -6,7 +6,7 @@ export default class CreatePoll extends Component {
   constructor(props){
     super(props)
     this.state = {
-      numChoices: [0,1],
+      numChoices: [0, 1],
       title: '',
       context: '',
       answers: []
@@ -14,10 +14,16 @@ export default class CreatePoll extends Component {
   }
 
   render() {
-    const createAnswer = (answer) => {
-        console.log('hit!')
-        this.setState({answers: [...this.state.answers, answer]})
-      }
+    const createAnswer = (eventAnswer) => {
+      // console.log('value', eventAnswer._targetInst._currentElement)
+      const choiceValue = eventAnswer._targetInst._currentElement.props.className.value
+      const choiceId = eventAnswer._targetInst._currentElement.props.className['data-zzz']
+      const newArr = [...this.state.answers]
+      newArr[choiceId] = choiceValue
+      console.log('items', newArr, choiceId, choiceValue)
+      this.setState({answers: newArr})
+      console.log('state', this.state)
+    }
     const nextVal = this.state.numChoices.length
     return (
         <Container>
@@ -50,8 +56,8 @@ export default class CreatePoll extends Component {
                     this.state.numChoices.map((choice, i) => {
                       return (
                         <InputChoice
-                          key={choice}
-                          value={this.state.answers[i]}
+                          key={i}
+                          data-zzz={choice}
                           handleChange={createAnswer}
                         />
                       )

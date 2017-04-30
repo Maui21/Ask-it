@@ -1,22 +1,11 @@
 import React, {Component} from 'react';
 
-import SVG, {
-  Circle,
-  Ellipse,
+import Svg, {
   G,
-  LinearGradient,
-  RadialGradient,
-  Line,
-  Path,
-  PolyGon,
-  Polyline,
   Rect,
-  Symbol,
-  Text,
-  Use,
-  Defs,
-  Stop
-} from 'react-native-SVG';
+  Path,
+  Text
+} from 'react-native-svg';
 
 class TripleBD extends Component {
   render() {
@@ -118,13 +107,6 @@ class TripleBD extends Component {
             d="M 220.921661455452 133.6913544230696 L 37.66670359441248 270.4597504355795"
             stroke="#CCCCCC"
             stroke-width="2"></Path>
-          <Text
-            x="157"
-            y="125"
-            style="color:#666666; font-weight:normal; cursor:default; font-size:12px; fill:#666666; Text-overflow:clip;"
-            Text-anchor="end"
-            transform="rotate(-31)">percentage of each floor section
-          </Text>
         </G>
         <G>
           <Path
@@ -481,28 +463,28 @@ class TripleBD extends Component {
           </Text>
         </G>
         <G>
-          <rect
+          <Rect
             stroke="#7CB5EC"
             stroke-width="1"
             fill="#7CB5EC"
             x="198.5390625"
             y="506"
             width="10"
-            height="10"></rect>
+            height="10"></Rect>
           <Text
             x="213.5390625"
             y="515"
             style="color:#666666; font-weight:bold; cursor:default; font-size:12px; fill:#666666; Text-overflow:clip;"
             Text-anchor="start">For
           </Text>
-          <rect
+          <Rect
             stroke="#434348"
             stroke-width="1"
             fill="#434348"
             x="198.5390625"
             y="521"
             width="10"
-            height="10"></rect>
+            height="10"></Rect>
           <Text
             x="213.5390625"
             y="530"
@@ -510,59 +492,6 @@ class TripleBD extends Component {
             Text-anchor="start">Against
           </Text>
         </G>
-        <G display="none">
-          <rect
-            stroke="#7CB5EC"
-            stroke-width="1"
-            fill="white"
-            x="10"
-            y="10"
-            width="96.28125"
-            height="87"></rect>
-          <Text
-            x="15"
-            y="25"
-            style="color:#666666; font-weight:bold; cursor:default; font-size:12px; fill:#666666; Text-overflow:clip;"
-            Text-anchor="start">Male
-          </Text>
-          <Text
-            x="15"
-            y="40"
-            style="color:#666666; font-weight:bold; cursor:default; font-size:12px; fill:#666666; Text-overflow:clip;"
-            Text-anchor="start">Conservative
-          </Text>
-          <Text
-            x="15"
-            y="55"
-            style="color:#666666; font-weight:bold; cursor:default; font-size:12px; fill:#666666; Text-overflow:clip;"
-            Text-anchor="start">14% (12)
-          </Text>
-          <Text
-            x="15"
-            y="75"
-            style="color:#7CB5EC; font-weight:normal; cursor:default; font-size:12px; fill:#7CB5EC; Text-overflow:clip;"
-            Text-anchor="start">For:
-          </Text>
-          <Text
-            x="63.921875"
-            y="75"
-            style="color:#7CB5EC; font-weight:normal; cursor:default; font-size:12px; fill:#7CB5EC; Text-overflow:clip;"
-            Text-anchor="start">67% (8)
-          </Text>
-          <Text
-            x="15"
-            y="90"
-            style="color:#434348; font-weight:normal; cursor:default; font-size:12px; fill:#434348; Text-overflow:clip;"
-            Text-anchor="start">Against:
-          </Text>
-          <Text
-            x="63.921875"
-            y="90"
-            style="color:#434348; font-weight:normal; cursor:default; font-size:12px; fill:#434348; Text-overflow:clip;"
-            Text-anchor="start">33% (4)
-          </Text>
-        </G>
-        <G></G>
       </Svg>
     )
   }

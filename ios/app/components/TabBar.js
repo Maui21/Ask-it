@@ -10,6 +10,7 @@ import getAllPolls from '../reducers/poll'
 import store from '../store'
 import Analyze from './Analyze'
 import TripleBD from './TripleBD'
+import Test from './Test'
 
 export default class TabBar extends Component {
     constructor(props){
@@ -20,9 +21,6 @@ export default class TabBar extends Component {
         store.dispatch(getAllPolls)
     }
     render() {
-        // console.log('store', store.getState())
-        // console.log('initial state',initialState)
-        // console.log('TB',initialState.allPolls)
         return (
             <Container>
                 <Header hasTabs >

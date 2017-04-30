@@ -17,6 +17,7 @@ const initialPollState = {
 
 const pollReducer = (state = initialPollState, action) => {
   const newState = Object.assign({}, state)
+  console.log('action', action)
   switch (action.type) {
   case LOAD_ALL_POLLS:
     newState.allPolls = action.allPolls
@@ -31,6 +32,7 @@ const pollReducer = (state = initialPollState, action) => {
     delete newState.allPolls[action.poll.id]
     break
   case VOTE_ON_POLL:
+    console.log('hit action')
     newState.selectedPoll = action.poll
     break
   case EDIT_POLL:
@@ -85,9 +87,13 @@ export const createPoll = (poll) => dispatch => {
   .then(newPoll => dispatch(addPoll(newPoll)))
 }
 
-export const voteOnPoll = (pollId, pollChange) => dispatch => {
-  return axios.put(`/api/polls/${pollId}`, pollChange)
+export const voteOnPollChoice = (pollId, numVotes) => dispatch => {
+  console.log('before axios')
+  return axios.put(`/api/polls/${pollId}`, {votes: ++numVotes})
+  .then(updatedPoll => console.log('poll', updatedPoll))
+  // .then(updatedPoll => updatedPoll.data)
   .then(updatedPoll => dispatch(updatePoll(updatedPoll)))
+  .then(() => console.log('after axios'))
 }
 
 export const editPoll = (pollId, pollChange) => dispatch => {
