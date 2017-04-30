@@ -6,13 +6,26 @@ import PollCard from './PollCard'
 import FooterNav from './FooterNav'
 import initialState from '../initialState'
 import InputChoice from './InputChoice'
+import getAllPolls from '../reducers/poll'
+import store from '../store'
+import Analyze from './Analyze'
+import TripleBD from './TripleBD'
 
 export default class TabBar extends Component {
+    constructor(props){
+        super(props)
+    }
+
+    componentDidMount(){
+        store.dispatch(getAllPolls)
+    }
     render() {
-        console.log('TB',initialState.allPolls)
+        // console.log('store', store.getState())
+        // console.log('initial state',initialState)
+        // console.log('TB',initialState.allPolls)
         return (
             <Container>
-            <Header hasTabs >
+                <Header hasTabs >
                     <Left>
                         <Button transparent>
                             <Icon name='menu' />
@@ -25,13 +38,13 @@ export default class TabBar extends Component {
                 </Header>
             <Tabs>
                 <Tab heading="Poll List">
-                    <PollList polls={initialState.allPolls}/>
+                    <PollList polls={store.getState().allPolls} />
                 </Tab>
                 <Tab heading="Create Poll">
                     <CreatePoll />
                 </Tab>
                 <Tab heading="Analyze">
-                    <InputChoice />
+                    <TripleBD />
                 </Tab>
             </Tabs>
             <Footer>

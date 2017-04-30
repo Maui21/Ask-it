@@ -3,16 +3,16 @@ import { Container, Content, Card, CardItem, Text, Body, Button, Item, List, Lis
 
 
 const ControlledChoices = props => {
-    console.log('hii', props)
+    // console.log('hii', props)
     return (
-      <List>
-        {props.choices.map((choice,i) => (
-          <ListItem key ={i} underline onPress={(e) => console.log('target', e.target)} >
+      <Content>
+        {props.choices.map((choice, i) => (
+          <ListItem key ={i} underline onPress={e => console.log(e)}>
               <Radio selected={false}/>
               <Text>{choice}</Text>
           </ListItem>
         ))}
-      </List>
+      </Content>
     )
   }
 

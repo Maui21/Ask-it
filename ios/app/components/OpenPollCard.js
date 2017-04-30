@@ -4,7 +4,7 @@ import ControlledChoices from './ControlledChoice'
 
 
 const OpenPollCard = props => {
-  console.log('my props', props)
+  // console.log('my props', props)
   return (
       <Card>
         <CardItem>
@@ -16,7 +16,7 @@ const OpenPollCard = props => {
             </Button>
           </Right>
         </CardItem>
-        <ControlledChoices choices={props.poll.choices} />
+        <ControlledChoices choices={props.poll.answers} />
         <Footer>
           <Left><Text style={{marginLeft: 10}} >{`${props.poll.totalVotes} ${'users'}`}</Text></Left>
           <Right><Text style={{marginRight: 10}} >{`Judah`}</Text></Right>

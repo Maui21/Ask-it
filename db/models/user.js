@@ -51,7 +51,7 @@ module.exports = db => db.define('user', {
 module.exports.associations = (User, {OAuth, Poll, Vote}) => { // vote or choice?
   User.hasOne(OAuth)
   User.hasMany(Poll, {as: 'owner'})
-  User.hasMany(Vote) //Choice?
+  User.hasMany(Vote)
 }
 
 function setEmailAndPassword(user) {

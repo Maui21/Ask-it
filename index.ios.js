@@ -5,22 +5,26 @@
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-
-import CreatePoll from './ios/app/components/CreatePoll'
+import {AppRegistry, StyleSheet, View} from 'react-native';
 import TabBar from './ios/app/components/TabBar'
 
+import store from './ios/app/store'
+import {getAllPolls} from './ios/app/reducers/poll'
+
+function onEnter(){
+  store.dispatch(getAllPolls())
+}
 
 export default class AwesomeProject extends Component {
+  componentDidMount(){
+      store.dispatch(getAllPolls())
+      console.log('mounted')
+      console.log('state after home mount',store.getState())
+  }
   render() {
     return (
       <View style={styles.container}>
-        <TabBar />
+        <TabBar entry={onEnter} />
       </View>
     );
   }
@@ -47,13 +51,3 @@ const styles = StyleSheet.create({
 
 AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
 
-        // <Text style={styles.welcome}>
-        //   Welcome to React Native!
-        // </Text>
-        // <Text style={styles.instructions}>
-        //   To get started, edit index.ios.js
-        // </Text>
-        // <Text style={styles.instructions}>
-        //   Press Cmd+R to reload,{'\n'}
-        //   Cmd+D or shake for dev menu
-        // </Text>

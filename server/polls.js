@@ -34,7 +34,7 @@ module.exports = require('express').Router()
   .get('/:id', (req, res, next) => {
     Poll.findById(req.params.id, {
       include: [{
-        model: Choice,
+        model: Choice
       }],
       where: {poll_id: req.params.id}
     })

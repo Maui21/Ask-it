@@ -3,7 +3,7 @@ import { Container, Content, Card, CardItem, Text, Icon, Right } from 'native-ba
 import PollCard from './PollCard'
 
 const PollList = props => {
-    console.log('PL', props)
+    // console.log('PL', props)
     return (
         <Container>
             <Content>
@@ -18,15 +18,3 @@ const PollList = props => {
 
 export default PollList
 
-                // <Card>
-                // <CardItem>
-                //     <Icon active name="logo-googleplus" />
-                //     <Text>Google Plus</Text>
-                //     <Right>
-                //         <Icon name="arrow-forward" />
-                //     </Right>
-                //     </CardItem>
-                // <CardItem>
-                //     <InputChoice />
-                //     </CardItem>
-                // </Card>
