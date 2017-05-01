@@ -369,31 +369,31 @@ class TripleBD extends Component {
             x="422.6532778496509"
             y="315.8796878932799"
             style="color:#666666; font-weight:normal; cursor:default; font-size:12px; fill:#666666; Text-overflow:clip;"
-            Text-anchor="start">Neither
+            Text-anchor="start">
           </Text>
           <Text
             x="363.87734725240585"
             y="387.5278127359679"
             style="color:#666666; font-weight:normal; cursor:default; font-size:12px; fill:#666666; Text-overflow:clip;"
-            Text-anchor="start">Liberal
+            Text-anchor="start">
           </Text>
           <Text
             x="305.24049775059916"
             y="459.175937578656"
             style="color:#666666; font-weight:normal; cursor:default; font-size:12px; fill:#666666; Text-overflow:clip;"
-            Text-anchor="start">Conservative
+            Text-anchor="start">
           </Text>
           <Text
             x="90.0135554793191"
             y="330.34481282668463"
             style="color:#666666; font-weight:normal; cursor:default; font-size:12px; fill:#666666; Text-overflow:clip;"
-            Text-anchor="end">Female
+            Text-anchor="end">
           </Text>
           <Text
             x="207.82502665159893"
             y="440.1149376088949"
             style="color:#666666; font-weight:normal; cursor:default; font-size:12px; fill:#666666; Text-overflow:clip;"
-            Text-anchor="end">Male
+            Text-anchor="end">
           </Text>
           <Text
             x="34.108242917233596"

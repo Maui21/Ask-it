@@ -8,9 +8,12 @@ import initialState from '../initialState'
 import InputChoice from './InputChoice'
 import getAllPolls from '../reducers/poll'
 import store from '../store'
+
 import Analyze from './Analyze'
+import SmallPieChart from './SmallPieChart'
+import PieChart from './PieChart'
 import TripleBD from './TripleBD'
-import Test from './Test'
+import BasicSVG from './BasicSVG'
 
 export default class TabBar extends Component {
     constructor(props){
@@ -20,29 +23,24 @@ export default class TabBar extends Component {
     componentDidMount(){
         store.dispatch(getAllPolls)
     }
+
     render() {
         return (
             <Container>
                 <Header hasTabs >
-                    <Left>
-                        <Button transparent>
-                            <Icon name='menu' />
-                        </Button>
-                    </Left>
                     <Body>
                         <Title>Ask It!</Title>
                     </Body>
-                    <Right />
                 </Header>
             <Tabs>
-                <Tab heading="Poll List">
-                    <PollList polls={store.getState().allPolls} />
-                </Tab>
                 <Tab heading="Create Poll">
                     <CreatePoll />
                 </Tab>
+                <Tab heading="Poll List">
+                    <PollList polls={store.getState().allPolls}/>
+                </Tab>
                 <Tab heading="Analyze">
-                    <TripleBD />
+                    <Analyze />
                 </Tab>
             </Tabs>
             <Footer>

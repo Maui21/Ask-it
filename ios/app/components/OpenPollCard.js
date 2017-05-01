@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Footer, Card, CardItem, Text, Left, Button, Item, Input, Icon, Right } from 'native-base';
+import {Footer, Card, CardItem, Text, Left, Button, Item, Center, Icon, Right } from 'native-base';
 import ControlledChoices from './ControlledChoice'
-import {voteOnPoll} from '../reducers/poll'
+import {voteOnPollChoice} from '../reducers/poll'
 import store from '../store'
 
 export default class OpenPollCard extends Component {
@@ -14,9 +14,10 @@ export default class OpenPollCard extends Component {
   }
 
 render() {
-  const vote = (choiceId, numVotes) => {
-    console.log('before dispatch')
-    store.dispatch(voteOnPoll(choiceId, numVotes))
+  console.log('OPCProps', this.props)
+  const vote = (pollId, choiceId, numPollVotes, numChoiceVotes) => {
+    console.log('before dispatch', voteOnPollChoice)
+    store.dispatch(voteOnPollChoice(pollId, choiceId, numPollVotes, numChoiceVotes))
     console.log('after dispatch')
   }
   const selectAnswer = (i) => {
@@ -24,20 +25,24 @@ render() {
     console.log(this.state.selectedAnswer)
   }
   return (
-      <Card>
+      <Card style={{borderwidth: 1, borderColor: 'green'}}>
         <CardItem>
           <Icon active name="md-pie" />
-          <Text>{this.props.poll.title}</Text>
+          <Text style={{color: 'green'}}>{this.props.poll.title}</Text>
           <Right>
             <Button transparent onPress={this.props.handleToggle}>
-              <Icon active name="arrow-up" />
+              <Icon style={{color: 'green'}} active name="arrow-up" />
             </Button>
           </Right>
         </CardItem>
-        <ControlledChoices vote={vote} choices={this.props.poll.choices} />
+        <CardItem>
+          <Text  style={{fontStyle: 'italic'}}>{this.props.poll.context}</Text>
+        </CardItem>
+        <ControlledChoices poll={this.props.poll} vote={vote} choices={this.props.poll.choices} />
         <Footer>
           <Left><Text style={{marginLeft: 10}} >{`${this.props.poll.totalVotes} ${'users'}`}</Text></Left>
-          <Right><Text style={{marginRight: 10}} >{`Judah`}</Text></Right>
+          <Button style={{marginTop: 10}} small success><Text>Analyze Results</Text></Button>
+          <Right><Text style={{marginRight: 10}} >{`${this.props.poll.owner.name}`}</Text></Right>
         </Footer>
       </Card>
     )

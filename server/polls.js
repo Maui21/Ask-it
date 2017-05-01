@@ -7,11 +7,29 @@ const Choice = db.model('choice')
 const Vote = db.model('vote')
 
 module.exports = require('express').Router()
+  // Find all votes
+  .get('/votes', (req, res, next) => {
+    Vote.findAll({
+      include: [{
+        all: true
+      }],
+    })
+    .then(allVotes => {
+      allVotes ? res.json(allVotes) : res.sendStatus(404)
+    })
+    .catch(next)
+  })
+  // Create a vote
+  .post('/:pollId/vote/:choiceId', (req, res, next) => {
+    Vote.create({poll_id: req.params.pollId, choice_id: req.params.choiceId, user_id: 2})
+      .then(vote => res.status(201).json(vote))
+      .catch(next)
+  })
  // Find all Polls
   .get('/', (req, res, next) => {
     Poll.findAll({
       include: [{
-        model: Choice
+        all: true
       }],
     })
     .then(allPolls => {
@@ -35,7 +53,7 @@ module.exports = require('express').Router()
   .get('/:id', (req, res, next) => {
     Poll.findById(req.params.id, {
       include: [{
-        model: Choice
+        all: true
       }],
       where: {poll_id: req.params.id}
     })
@@ -70,8 +88,4 @@ module.exports = require('express').Router()
     })
   })
 
-  .post(':pollId/vote/:choiceId', (req,res,next) => {
-    Vote.create(req.body)
-      .then(vote => res.status(201).json(vote))
-      .catch(next)
-    })
+

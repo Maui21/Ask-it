@@ -7,10 +7,11 @@
 import React, { Component } from 'react';
 import {AppRegistry, StyleSheet, View} from 'react-native';
 import TabBar from './ios/app/components/TabBar'
+import Home from './ios/app/components/Home'
 
 import store from './ios/app/store'
 import {getAllPolls} from './ios/app/reducers/poll'
-
+console.disableYellowBox = true;
 function onEnter(){
   store.dispatch(getAllPolls())
 }
@@ -18,8 +19,6 @@ function onEnter(){
 export default class AwesomeProject extends Component {
   componentDidMount(){
       store.dispatch(getAllPolls())
-      console.log('mounted')
-      console.log('state after home mount',store.getState())
   }
   render() {
     return (

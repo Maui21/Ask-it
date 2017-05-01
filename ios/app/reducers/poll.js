@@ -78,31 +78,36 @@ export const getAllPolls = () => dispatch => {
 }
 
 export const getAllPollsByUser = (userId) => dispatch => {
-  return axios.get(`/api/polls/user/${userId}`)
+  return axios.get(`http://localhost:3000/api/polls/user/${userId}`)
   .then(allPolls => dispatch(loadAllUserPolls(allPolls.data)))
 }
 
 export const createPoll = (poll) => dispatch => {
-  return axios.post('/api/polls', poll)
+  console.log('hit create')
+  return axios.post('http://localhost:3000/api/polls', poll)
   .then(newPoll => dispatch(addPoll(newPoll)))
+  .then(()=> console.log('finished create'))
+
 }
 
-export const voteOnPollChoice = (pollId, numVotes) => dispatch => {
+export const voteOnPollChoice = (pollId, choiceId) => dispatch => {
   console.log('before axios')
-  return axios.put(`/api/polls/${pollId}`, {votes: ++numVotes})
-  .then(updatedPoll => console.log('poll', updatedPoll))
+  // editPoll(pollId, {totalVotes: pollVotes})
+  return axios.post(`http://localhost:3000/api/polls/${pollId}/vote/${choiceId}`, {})
+  .then(newVote => console.log('vote', newVote.data))
   // .then(updatedPoll => updatedPoll.data)
-  .then(updatedPoll => dispatch(updatePoll(updatedPoll)))
+  .then(newVote => dispatch(updatePoll(newVote)))
   .then(() => console.log('after axios'))
+
 }
 
 export const editPoll = (pollId, pollChange) => dispatch => {
-  return axios.put(`/api/polls/${pollId}`, pollChange)
+  return axios.put(`http://localhost:3000/api/polls/${pollId}`, pollChange)
   .then(updatedPoll => dispatch(updatePoll(updatedPoll)))
 }
 
 export const deletePoll = (pollId) => dispatch => {
-  return axios.delete(`/api/polls/${pollId}`)
+  return axios.delete(`http://localhost:3000/api/polls/${pollId}`)
   .then(deletedPoll => dispatch(removePoll(deletedPoll)))
 }
 

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Content, Card, CardItem, Text, Body, Button, Item, InputGroup, Input, Icon, H3, Form, Header, Left, Label, Title, Right } from 'native-base';
+import {AlertIOS} from 'react-native'
 import InputChoice from './InputChoice'
+import createPoll from '../reducers/poll'
+import store from '../store'
 
 export default class CreatePoll extends Component {
   constructor(props){
@@ -14,6 +17,11 @@ export default class CreatePoll extends Component {
   }
 
   render() {
+    const submitPoll = (pollObj) => {
+      console.log('hit submit')
+      store.dispatch(createPoll(pollObj))
+      console.log('finished submit')
+    }
     const createAnswer = (eventAnswer) => {
       // console.log('value', eventAnswer._targetInst._currentElement)
       const choiceValue = eventAnswer._targetInst._currentElement.props.className.value
@@ -46,7 +54,7 @@ export default class CreatePoll extends Component {
                   </Item>
                 </CardItem>
                 <CardItem style={{flexDirection: 'column'}}>
-                  <Button small rounded block style={{marginLeft: 0}}
+                  <Button small rounded block style={{marginLeft: 0, marginBottom: 10}}
                     onPress={()=>{
                       this.setState({numChoices: [...this.state.numChoices, nextVal]})
                     }}>
@@ -66,11 +74,24 @@ export default class CreatePoll extends Component {
                 </CardItem>
             </Card>
             <Item style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-              <Right><Button success style={{margin: 20, alignContent: 'flex-end'}}
-                onPress={(e) => console.log(this.state)}>
-                <Text style={{color: 'white'}}>Ask It!</Text>
-                <Icon active name="arrow-forward" />
-              </Button></Right>
+              <Right>
+                <Button success style={{margin: 20, alignContent: 'flex-end'}}
+                    onPress={() => {
+                      const poll = {
+                        title: this.state.title,
+                        context: this.state.context,
+                        answers: this.state.answers
+                      }
+                      //submitPoll(poll)
+                      AlertIOS.alert(
+                        `Great Question!`,
+                        "We'll ask your friends for you"
+                      )
+                    }}>
+                  <Text style={{color: 'white'}}>Ask It!</Text>
+                  <Icon active name="arrow-forward" />
+                </Button>
+              </Right>
             </Item>
           </Content>
         </Container>
